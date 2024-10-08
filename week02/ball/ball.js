@@ -4,14 +4,15 @@ const ball = {x:20, y:20, dx: 5, dy: 2};
 let   old  = {x: ball.x, y: ball.y};
 const height = 800;
 const width = 900;
+let counter = 0;
 
 function start() {
     const canvas  = document.querySelector("canvas");
     canvas.height = height;
     canvas.width = width;
-    canvas.style = "background-color: pink;"
+    canvas.style = "background-color: lightblue;"
     const context = canvas.getContext("2d");
-    context.fillStyle = "black"
+    context.fillStyle = "turquoise"
 
 
     setInterval(() => {
@@ -27,7 +28,9 @@ function nextBoard() {
         if (ball.y >  height - radius * 2 ) {
             ball.dy -= 3;
             ball.dy *= -1;
+            let colorCode = (Math.random()*16)
 
+            console.log(counter++);
         }
         if (ball.x > width - radius * 2) ball.dx *= -1;
         if (ball.y <  radius && ball.dy < 0) ball.dy *= -1;
