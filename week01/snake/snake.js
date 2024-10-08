@@ -1,4 +1,3 @@
-
 const north = {dx:  0, dy: -1};
 const east  = {dx:  1, dy:  0};
 const south = {dx:  0, dy:  1};
@@ -17,22 +16,19 @@ const snake = [
 ];
 let food = {x: 15, y: 15};
 
-function snakeEquals(a, b) { 
-	/* fill here */
-}
+function snakeEquals(a, b) { return a.x === b.x && a.y === b.y }
 
 function changeDirection(orientation) {
-    /* fill here */
+    const idx = orientation.indexOf(direction);
+    direction = orientation[idx + 1];
 }
 
 function start() {
     const canvas  = document.getElementById("canvas");
     const context = canvas.getContext("2d");
 
-    const rightArrow = 39;
-    const leftArrow  = 37;
     window.onkeydown = evt => {
-        const orientation = (evt.keyCode === rightArrow) ? clockwise : countercw;
+        const orientation = (evt.key === 'ArrowRight') ? clockwise : countercw;
         changeDirection(orientation);
     };
 
@@ -62,10 +58,10 @@ function nextBoard() {
         food.x = Math.floor(Math.random() * 20);   // place new food at random location
         food.y = Math.floor(Math.random() * 20);
     } else {
-        /* fill here */ // no food found => no growth despite new head => remove last element
+        snake.pop(); // no food found => no growth despite new head => remove last element
     }
 
-    /* fill here */ // put head at front of the list
+    snake.unshift(head); // put head at front of the list
 }
 
 function display(context) {
@@ -87,5 +83,3 @@ function display(context) {
 function fillBox(context, element) {
     context.fillRect(element.x * 20 + 1, element.y * 20 + 1, 18, 18);
 }
-
-
