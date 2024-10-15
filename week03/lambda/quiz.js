@@ -1,21 +1,25 @@
-const s1 = x => y => z => x;
-const s2 = x => y => z => y;
-const s3 = x => y => z => z;
+const Left = x => f => g =>  f(x);
+const Right = x => f => g => g(x);
+const either = e => f =>g => e(f)(g);
 
-const triple = x => y => z => f => f(x)(y)(z);
-const a = t => t(s1);
-const b = t => t(s2);
-const c = t => t(s3);
-
- const person = triple;
-const firstname = a;
-const lastname = b;
- const age = c;
-
-const bran = person("Brendan")("Eich")(50);
-
-const oneTwoThree = triple(1)(2)(3)
-
-document.writeln(a(oneTwoThree) === 1;
+const safeDiv = num => divisor => divisor === 0
+? Left("Cannot"): Right(num/divisor);
+const result = safeDiv(1)(1);
+either(result)(msg => document.writeln(msg))(val=> document.writeln(val ===1));
 
 
+const join = x => (acc, cur) => acc + x + cur ;
+[1,2,3].reduce(join('-'));
+
+
+const id = x => x;
+const eShow = e => either(e)(id)(val=> "Result is: " + val);
+
+
+eShow(safeDiv(1)(0));
+
+const x_ = Math. random();
+
+console.log(eShow( safeDiv(1)(0)) === "Cannot");
+
+console.log(eShow (safeDiv(x_)(1)) === "Result is: "+x_);
